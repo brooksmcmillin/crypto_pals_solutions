@@ -1,6 +1,6 @@
 import unittest
 
-from set1 import hex_to_base64, fixedXOR, xor_decode
+from set1 import hex_to_base64, fixed_xor, xor_decode, file_xor_decode
 
 class TestSet1(unittest.TestCase):
 
@@ -9,16 +9,22 @@ class TestSet1(unittest.TestCase):
         _output = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
         self.assertEqual(hex_to_base64(_input), _output)
 
-    def test_fixedXOR(self):
+    def test_fixed_xOR(self):
         _input1 = "1c0111001f010100061a024b53535009181c"
         _input2 = "686974207468652062756c6c277320657965"
         _output = "746865206b696420646f6e277420706c6179"
-        self.assertEqual(fixedXOR(_input1, _input2), _output)
+        self.assertEqual(fixed_xor(_input1, _input2), _output)
 
     def test_xor_decode(self):
         _input = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
         _output = "Cooking MC's like a pound of bacon"
         self.assertEqual(xor_decode(_input)[0], _output)
+
+    def test_detect_and_xor_decode(self):
+        file_name = 'files/set1_4.txt'
+        _output = "Now that the party is jumping\n"
+        self.assertEqual(file_xor_decode(file_name), _output)
+        
 
 if __name__ == "__main__":
     unittest.main()
